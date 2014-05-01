@@ -44,8 +44,10 @@ func swim(node *Node, depth int, current int) *Node {
 }
 
 func depth(node *Node) int {
-	if node == nil {
-		return 0
+	depth := 0
+	for node != nil {
+		node = node.Parent
+		depth += 1
 	}
-	return 1 + depth(node.Parent)
+	return depth
 }
