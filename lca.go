@@ -9,14 +9,14 @@ func main() {
 	p := &Node{&Node{&Node{sp}}}
 	n := &Node{&Node{p}}
 	m := &Node{&Node{&Node{p}}}
-	fmt.Println(p == lac(n, m))
+	fmt.Println(p == lca(n, m))
 }
 
 type Node struct {
 	Parent *Node
 }
 
-func lac(first, second *Node) *Node {
+func lca(first, second *Node) *Node {
 	fD := depth(first)
 	sD := depth(second)
 	depth := min(fD, sD)
