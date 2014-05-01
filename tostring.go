@@ -1,11 +1,17 @@
 package main
 
-import "fmt"
+import (
+	"fmt"
+	"math"
+	"strconv"
+)
 
 func main() {
 	fmt.Println("123" == tostring(123))
 	fmt.Println("-123" == tostring(-123))
 	fmt.Println("0" == tostring(0))
+	fmt.Println(strconv.FormatInt(math.MinInt64, 10) == tostring(math.MinInt64))
+	fmt.Println(strconv.FormatInt(math.MaxInt64, 10) == tostring(math.MaxInt64))
 }
 
 func tostring(n int) string {
@@ -13,6 +19,9 @@ func tostring(n int) string {
 		return solve(n)
 	} else if n == 0 {
 		return "0"
+	} else if n == math.MinInt64 {
+		return "-" + solve(math.MaxInt64/10) +
+			ch(math.MaxInt64%10+1)
 	} else {
 		return "-" + solve(-n)
 	}
