@@ -7,14 +7,21 @@ import (
 )
 
 func main() {
-	fmt.Println("123" == tostring(123))
-	fmt.Println("-123" == tostring(-123))
-	fmt.Println("0" == tostring(0))
-	fmt.Println(strconv.FormatInt(math.MinInt64, 10) == tostring(math.MinInt64))
-	fmt.Println(strconv.FormatInt(math.MaxInt64, 10) == tostring(math.MaxInt64))
+	tests := []int64{123, -123, 0, math.MaxInt64, math.MinInt64}
+	for _, i := range tests {
+		if test(i) {
+			fmt.Println("test:", i, ": Passed")
+		} else {
+			fmt.Println("test:", i, ": Failed")
+		}
+	}
 }
 
-func tostring(n int) string {
+func test(i int64) bool {
+	return strconv.FormatInt(i, 10) == tostring(i)
+}
+
+func tostring(n int64) string {
 	if n > 0 {
 		return solve(n)
 	} else if n == 0 {
@@ -27,14 +34,14 @@ func tostring(n int) string {
 	}
 }
 
-func solve(n int) string {
+func solve(n int64) string {
 	if n <= 0 {
 		return ""
 	}
 	return solve(n/10) + ch(n%10)
 }
 
-var m = map[int]string{
+var m = map[int64]string{
 	0: "0",
 	1: "1",
 	2: "2",
@@ -47,6 +54,6 @@ var m = map[int]string{
 	9: "9",
 }
 
-func ch(n int) string {
+func ch(n int64) string {
 	return m[n]
 }
